@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "13657452854",
+    "project_id": "tp-modulo2",
+    "storage_bucket": "tp-modulo2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:13657452854:android:9360ce6bd738c54d6ec397",
+        "android_client_info": {
+          "package_name": "com.example.tp_modulo2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "13657452854-7j73j8fboaqb8qsrk539bbv3v2ejk86k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDnfDnzSXXUdi0zKEKYeF9KvcUV_G_gYqU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "13657452854-7j73j8fboaqb8qsrk539bbv3v2ejk86k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
