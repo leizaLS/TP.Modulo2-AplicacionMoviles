@@ -10,15 +10,14 @@
         android:id="@+id/loginEmail"
         android:layout_width="305dp"
         android:layout_height="46dp"
-        android:layout_marginTop="92dp"
+        android:layout_marginTop="40dp"
         android:ems="10"
         android:hint="Email"
         android:importantForAutofill="no"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <EditText
         android:id="@+id/loginPassword"
@@ -49,8 +48,22 @@
         android:layout_width="219dp"
         android:layout_height="45dp"
         android:layout_marginTop="28dp"
+        android:backgroundTint="#009688"
         android:text="Register"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loginButton" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="LOGIN"
+        android:textColor="#009688"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
