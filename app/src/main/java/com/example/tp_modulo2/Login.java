@@ -65,7 +65,7 @@ public class Login extends AppCompatActivity {
                 firebaseAuth.signInWithEmailAndPassword(email.getText().toString().trim(), password.getText().toString().trim()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
                     public void onSuccess(AuthResult authresult) {
-                        //logueo exitoso
+                        //login exitoso
                         //startActivity(new Intent(getApplicationContext(), MainActivity.class));
                         startActivity(new Intent(getApplicationContext(), PostDetailHostActivity.class));
                         Toast.makeText(Login.this, "Login exitoso", Toast.LENGTH_SHORT).show();
@@ -85,7 +85,7 @@ public class Login extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         if (FirebaseAuth.getInstance().getCurrentUser() != null) {
-            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            startActivity(new Intent(getApplicationContext(), PostDetailHostActivity.class));
             finish();
         }
     }
