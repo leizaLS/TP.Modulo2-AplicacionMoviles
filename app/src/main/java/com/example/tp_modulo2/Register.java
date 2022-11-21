@@ -50,10 +50,10 @@ public class Register extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Leo los datos ingresados
-                String nameT = name.getText().toString();
-                String emailT = email.getText().toString();
-                String passwordT = password.getText().toString();
-                String passwordConfT = confirmPassword.getText().toString();
+                String nameT = name.getText().toString().trim();
+                String emailT = email.getText().toString().trim();
+                String passwordT = password.getText().toString().trim();
+                String passwordConfT = confirmPassword.getText().toString().trim();
 
                 if (nameT.isEmpty() | emailT.isEmpty() | passwordT.isEmpty() | passwordConfT.isEmpty()) {
                     Toast.makeText(Register.this, "Tiene campos sin completar", Toast.LENGTH_SHORT).show();

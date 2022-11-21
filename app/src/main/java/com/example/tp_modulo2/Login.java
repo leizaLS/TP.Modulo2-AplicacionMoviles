@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 
+import com.example.maestro_detalle.PostDetailHostActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -61,11 +62,12 @@ public class Login extends AppCompatActivity {
                     Toast.makeText(Login.this, "Complete los campos primero", Toast.LENGTH_SHORT).show();
                 }
                 //
-                firebaseAuth.signInWithEmailAndPassword(email.getText().toString(), password.getText().toString()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                firebaseAuth.signInWithEmailAndPassword(email.getText().toString().trim(), password.getText().toString().trim()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
                     public void onSuccess(AuthResult authresult) {
                         //logueo exitoso
-                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        //startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        startActivity(new Intent(getApplicationContext(), PostDetailHostActivity.class));
                         Toast.makeText(Login.this, "Login exitoso", Toast.LENGTH_SHORT).show();
                         finish();
                     }
