@@ -23,8 +23,12 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
 
 public class Register extends AppCompatActivity {
     EditText name, email, password, confirmPassword;
@@ -68,6 +72,23 @@ public class Register extends AppCompatActivity {
                     fAuth.createUserWithEmailAndPassword(emailT, passwordT).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                         @Override
                         public void onSuccess(AuthResult authresult) {
+                            //Guardamos datos en firebase
+                            //progressDialog.dismiss();
+                            FirebaseUser user = fAuth.getCurrentUser();
+
+                            String email = user.getEmail();
+                            String uid = user.getUid();
+
+                            HashMap<Object, String> hashMap = new HashMap<>();
+                            hashMap.put("email", email);
+                            hashMap.put("uid", uid);
+                            hashMap.put("name", nameT);
+                            hashMap.put("image", "");
+                            FirebaseDatabase database = FirebaseDatabase.getInstance();
+                            DatabaseReference reference = database.getReference("Users");
+                            reference.child(uid).setValue(hashMap);
+
+
                             //Enviar usuario a la otra pagina
                             startActivity(new Intent(getApplicationContext(), MainActivity.class));
                             finish();
