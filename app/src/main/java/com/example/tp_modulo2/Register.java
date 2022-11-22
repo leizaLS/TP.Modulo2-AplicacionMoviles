@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 
+import com.example.maestro_detalle.PostDetailHostActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -69,7 +70,7 @@ public class Register extends AppCompatActivity {
                         @Override
                         public void onSuccess(AuthResult authresult) {
                             //Enviar usuario a la otra pagina
-                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                            startActivity(new Intent(getApplicationContext(), PostDetailHostActivity.class));
                             finish();
                             //Toast.makeText(Register.this, "Email de verificación enviado!", Toast.LENGTH_SHORT).show();
                         }
