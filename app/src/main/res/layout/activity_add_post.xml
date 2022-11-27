@@ -37,13 +37,32 @@
             android:minHeight="120dp"
             android:gravity="start" />
 
+        <EditText
+            android:id="@+id/GeolocationData"
+            android:padding="10dp"
+            android:hint="..."
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="none"
+            android:gravity="start"
+            android:editable="false"
+            android:singleLine="true" />
+
+        <Button
+            android:id="@+id/getGps"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="GPS"
+            android:textAlignment="center" />
+
         <Button
             android:id="@+id/pUploadBtn"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:text="Publicar"
-            android:layout_gravity="center"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Publicar" />
 
     </LinearLayout>
 

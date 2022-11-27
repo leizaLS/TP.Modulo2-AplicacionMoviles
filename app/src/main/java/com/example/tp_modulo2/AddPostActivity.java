@@ -12,14 +12,21 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -45,7 +52,11 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
 import java.security.PrivilegedAction;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
 
 public class AddPostActivity extends AppCompatActivity {
     //Permisos camara y galeria
@@ -61,15 +72,18 @@ public class AddPostActivity extends AppCompatActivity {
     //Utils
     FirebaseAuth firebaseAuth;
     DatabaseReference userDbRef;
+    LocationManager locationManager;
     //ActionBar actionBar;
 
-    EditText titleEt, descriptionEt;
+    EditText titleEt, descriptionEt, GeolocationData;
     ImageView imageIv;
-    Button uploadBtn;
+    Button uploadBtn, getGps;
 
     //Datos usuario
     String name, email, uid, dp;
     Uri image_rui = null;
+    //Datos geolocalizacion
+    String city, state, country, latitude, longitude;
 
     ProgressDialog pd;
 
@@ -188,6 +202,8 @@ public class AddPostActivity extends AppCompatActivity {
         descriptionEt = findViewById(R.id.pDescriptionEt);
         imageIv = findViewById(R.id.pImageIv);
         uploadBtn = findViewById(R.id.pUploadBtn);
+        getGps = findViewById(R.id.getGps);
+        GeolocationData = findViewById(R.id.GeolocationData);
 
         //Listener del seleccionar imagen
         imageIv.setOnClickListener(new View.OnClickListener() {
@@ -203,8 +219,9 @@ public class AddPostActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String title = titleEt.getText().toString().trim();
                 String description = descriptionEt.getText().toString().trim();
+                String geolocation = GeolocationData.getText().toString().trim();
 
-                if (TextUtils.isEmpty(title) || TextUtils.isEmpty(description)) {
+                if (TextUtils.isEmpty(title) || TextUtils.isEmpty(description) || TextUtils.isEmpty(geolocation)) {
                     Toast.makeText(AddPostActivity.this, "Tiene campos sin completar", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -217,7 +234,57 @@ public class AddPostActivity extends AppCompatActivity {
                 }
             }
         });
+
+        //Listener del boton gps
+        getGps.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                locationEnabled();
+                getLocation();
+            }
+        });
     }
+
+    private void locationEnabled() {
+        LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        boolean gps_enabled = false;
+        boolean network_enabled = false;
+        try {
+            gps_enabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            network_enabled = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (!gps_enabled && !network_enabled) {
+            new androidx.appcompat.app.AlertDialog.Builder(AddPostActivity.this)
+                    .setTitle("Enable GPS Service")
+                    .setMessage("We need your GPS location to show Near Places around you.")
+                    .setCancelable(false)
+                    .setPositiveButton("Enable", new
+                            DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface paramDialogInterface, int paramInt) {
+                                    startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+                                }
+                            })
+                    .setNegativeButton("Cancel", null)
+                    .show();
+        }
+    }
+
+    void getLocation() {
+        try {
+            locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 2000, 10,locationListenerGPS );
+        } catch (SecurityException e) {
+            e.printStackTrace();
+        }
+    }
+    //other
 
     private void uploadData(String title, String description, String uri) {
         pd.setMessage("Publicando...");
@@ -225,6 +292,7 @@ public class AddPostActivity extends AppCompatActivity {
 
         String timeStamp = String.valueOf(System.currentTimeMillis());
         String filePathAndName = "Post/" + "post_" + timeStamp;
+        String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
 
         //publicar con imagen
         if (!uri.equals("noImage")) {
@@ -251,6 +319,13 @@ public class AddPostActivity extends AppCompatActivity {
                                 hashMap.put("pDescr", description);
                                 hashMap.put("pImage", downloadUri);
                                 hashMap.put("pTime", timeStamp);
+                                //Datos geolocalizacion -> city, state, country, latitude, longitude;
+                                hashMap.put("city", city);
+                                hashMap.put("state", state);
+                                hashMap.put("country", country);
+                                hashMap.put("latitude", latitude);
+                                hashMap.put("longitude", longitude);
+                                hashMap.put("publicationDate", currentDate);
 
                                 DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Post");
                                 ref.child(timeStamp).setValue(hashMap)
@@ -291,6 +366,13 @@ public class AddPostActivity extends AppCompatActivity {
             hashMap.put("pDescr", description);
             hashMap.put("pImage", "noImage");
             hashMap.put("pTime", timeStamp);
+            //Datos geolocalizacion -> city, state, country, latitude, longitude;
+            hashMap.put("city", city);
+            hashMap.put("state", state);
+            hashMap.put("country", country);
+            hashMap.put("latitude", latitude);
+            hashMap.put("longitude", longitude);
+            hashMap.put("publicationDate", currentDate);
 
             DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Post");
             ref.child(timeStamp).setValue(hashMap)
@@ -334,9 +416,7 @@ public class AddPostActivity extends AppCompatActivity {
                         Toast.makeText(this, "Error permisos", Toast.LENGTH_SHORT).show();
                     }
                 }
-                else {
-
-                }
+                else { }
             }
             break;
 
@@ -350,9 +430,7 @@ public class AddPostActivity extends AppCompatActivity {
                         Toast.makeText(this, "Error permisos", Toast.LENGTH_SHORT).show();
                     }
                 }
-                else {
-
-                }
+                else { }
             }
             break;
         }
@@ -371,4 +449,37 @@ public class AddPostActivity extends AppCompatActivity {
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
+
+    //Codigo de GPS
+    LocationListener locationListenerGPS = new LocationListener() {
+        @Override
+        public void onLocationChanged(@NonNull Location location) {
+            try {
+                Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
+                List<Address> addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+
+                //Asignaciones para cuando guardemos la publicacion
+                city = addresses.get(0).getLocality();
+                state = addresses.get(0).getAdminArea();
+                country = addresses.get(0).getCountryName();
+                latitude = String.valueOf(addresses.get(0).getLatitude());
+                longitude = String.valueOf(addresses.get(0).getLongitude());
+
+                String data = addresses.get(0).getLocality() + ", " + addresses.get(0).getAdminArea();
+                GeolocationData.setText(data);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras) { }
+
+        @Override
+        public void onProviderEnabled(String provider) { }
+
+        @Override
+        public void onProviderDisabled(String provider) { }
+    };
 }
