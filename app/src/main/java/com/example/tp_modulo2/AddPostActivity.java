@@ -326,6 +326,7 @@ public class AddPostActivity extends AppCompatActivity {
                                 hashMap.put("latitude", latitude);
                                 hashMap.put("longitude", longitude);
                                 hashMap.put("publicationDate", currentDate);
+                                hashMap.put("post_state", "lost");
 
                                 DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Post");
                                 ref.child(timeStamp).setValue(hashMap)
@@ -373,6 +374,7 @@ public class AddPostActivity extends AppCompatActivity {
             hashMap.put("latitude", latitude);
             hashMap.put("longitude", longitude);
             hashMap.put("publicationDate", currentDate);
+            hashMap.put("post_state", "lost");
 
             DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Post");
             ref.child(timeStamp).setValue(hashMap)

@@ -23,9 +23,9 @@
         <ImageView
             android:id="@+id/pImageIv"
             android:layout_width="match_parent"
-            android:layout_height="377dp"
+            android:layout_height="174dp"
             android:minHeight="200dp"
-            app:srcCompat="@drawable/transparent_picture" />
+            app:srcCompat="@drawable/upload_img" />
 
         <EditText
             android:id="@+id/pDescriptionEt"
@@ -39,13 +39,13 @@
 
         <EditText
             android:id="@+id/GeolocationData"
-            android:padding="10dp"
-            android:hint="..."
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="none"
-            android:gravity="start"
             android:editable="false"
+            android:gravity="start"
+            android:hint="Ubicación actual..."
+            android:inputType="none"
+            android:padding="10dp"
             android:singleLine="true" />
 
         <Button
