@@ -3,9 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item android:id="@+id/action_logout"
-        android:title="Logout"/>
+        android:title="Cerrar sesión Ⓧ"/>
 
-    <item android:id="@+id/action_add_post"
-        android:title="Add post"
+    <item
+        android:id="@+id/action_add_post"
+
+        android:icon="@android:drawable/sym_action_chat"
+        android:title="New post"
         app:showAsAction="always" />
 </menu>

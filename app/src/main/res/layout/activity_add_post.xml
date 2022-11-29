@@ -23,9 +23,9 @@
         <ImageView
             android:id="@+id/pImageIv"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#33293A"
-            android:minHeight="200dp" />
+            android:layout_height="377dp"
+            android:minHeight="200dp"
+            app:srcCompat="@drawable/transparent_picture" />
 
         <EditText
             android:id="@+id/pDescriptionEt"

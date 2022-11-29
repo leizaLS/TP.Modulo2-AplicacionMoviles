@@ -1,19 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="pantalla de inicio"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+<!--    <com.google.android.material.tabs.TabLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:id="@+id/tab_layout">-->
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+<!--        <com.google.android.material.tabs.TabItem-->
+<!--            android:id="@+id/home_tab"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:icon="@drawable/home" />-->
+
+<!--        <com.google.android.material.tabs.TabItem-->
+<!--            android:id="@+id/my_posts"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:icon="@drawable/person" />-->
+
+<!--    </com.google.android.material.tabs.TabLayout>-->
+
+<!--    <androidx.viewpager2.widget.ViewPager2-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:id="@+id/view_pager"-->
+<!--        android:layout_below="@+id/tab_layout" >-->
+<!--    </androidx.viewpager2.widget.ViewPager2>-->
+
+        <!-- Donde se lista los post, no eliminar importante! -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/recyclerView" />
+</RelativeLayout>
