@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.example.tp_modulo2.fragments.HomeFragment;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -44,86 +45,85 @@ public class MainActivity extends AppCompatActivity {
         firebaseAuth = firebaseAuth.getInstance();
 
         //Tabs
-//        tabLayout = findViewById(R.id.tab_layout);
-//        viewPager2 = findViewById(R.id.view_pager);
-//        myViewerPageAdapter = new MyViewerPageAdapter(this);
-//        viewPager2.setAdapter(myViewerPageAdapter);
-//
-//        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-//            @Override
-//            public void onTabSelected(TabLayout.Tab tab) {
-//                viewPager2.setCurrentItem(tab.getPosition());
-//            }
-//
-//            @Override
-//            public void onTabUnselected(TabLayout.Tab tab) { }
-//
-//            @Override
-//            public void onTabReselected(TabLayout.Tab tab) { }
-//        });
-//
-//        viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
-//            @Override
-//            public void onPageSelected(int position) {
-//                super.onPageSelected(position);
-//                tabLayout.getTabAt(position).select();
-//            }
-//        });
+        tabLayout = findViewById(R.id.tab_layout);
+        viewPager2 = findViewById(R.id.view_pager);
+        myViewerPageAdapter = new MyViewerPageAdapter(this);
+        viewPager2.setAdapter(myViewerPageAdapter);
 
-        //ShowData
-        recyclerView = findViewById(R.id.recyclerView);
-        recyclerList = new ArrayList<>();
-        PostAdapter recyclerAdapter = new PostAdapter(recyclerList, getApplicationContext());
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
-        recyclerView.setNestedScrollingEnabled(false);
-        recyclerView.setAdapter(recyclerAdapter);
-
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        firebaseDatabase.getReference().child("Post").addListenerForSingleValueEvent(new ValueEventListener() {
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    MainPosts mainPosts = dataSnapshot.getValue(MainPosts.class);
-                    recyclerList.add(mainPosts);
-                }
-                recyclerAdapter.notifyDataSetChanged();
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager2.setCurrentItem(tab.getPosition());
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) { }
+            public void onTabUnselected(TabLayout.Tab tab) { }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) { }
         });
+
+        viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+                tabLayout.getTabAt(position).select();
+            }
+        });
+
+        //ShowData
+//        recyclerView = findViewById(R.id.recyclerView);
+//        recyclerList = new ArrayList<>();
+//        PostAdapter recyclerAdapter = new PostAdapter(recyclerList, getApplicationContext());
+//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+//        recyclerView.setLayoutManager(linearLayoutManager);
+//        recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
+//        recyclerView.setNestedScrollingEnabled(false);
+//        recyclerView.setAdapter(recyclerAdapter);
+//
+//        firebaseDatabase = FirebaseDatabase.getInstance();
+//        firebaseDatabase.getReference().child("Post").addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+//                    MainPosts mainPosts = dataSnapshot.getValue(MainPosts.class);
+//                    recyclerList.add(mainPosts);
+//                }
+//                recyclerAdapter.notifyDataSetChanged();
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) { }
+//        });
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        //Toast.makeText(getApplicationContext(), "Actualizando posts de firebase", Toast.LENGTH_LONG).show();
-        recyclerList = new ArrayList<>();
-        PostAdapter recyclerAdapter = new PostAdapter(recyclerList, getApplicationContext());
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
-        recyclerView.setNestedScrollingEnabled(false);
-        recyclerView.setAdapter(recyclerAdapter);
-
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        firebaseDatabase.getReference().child("Post").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                recyclerList.clear();
-
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    MainPosts mainPosts = dataSnapshot.getValue(MainPosts.class);
-                    recyclerList.add(mainPosts);
-                }
-                recyclerAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) { }
-        });
+//        recyclerList = new ArrayList<>();
+//        PostAdapter recyclerAdapter = new PostAdapter(recyclerList, getApplicationContext());
+//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+//        recyclerView.setLayoutManager(linearLayoutManager);
+//        recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
+//        recyclerView.setNestedScrollingEnabled(false);
+//        recyclerView.setAdapter(recyclerAdapter);
+//
+//        firebaseDatabase = FirebaseDatabase.getInstance();
+//        firebaseDatabase.getReference().child("Post").addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                recyclerList.clear();
+//
+//                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+//                    MainPosts mainPosts = dataSnapshot.getValue(MainPosts.class);
+//                    recyclerList.add(mainPosts);
+//                }
+//                recyclerAdapter.notifyDataSetChanged();
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) { }
+//        });
     }
 
     //Mostrar menu de log out en main

@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
+import com.example.tp_modulo2.fragments.HistoryFragment;
 import com.example.tp_modulo2.fragments.HomeFragment;
 import com.example.tp_modulo2.fragments.UserPosts;
 
@@ -22,6 +23,8 @@ public class MyViewerPageAdapter extends FragmentStateAdapter {
                 return new HomeFragment();
             case 1:
                 return new UserPosts();
+            case 2:
+                return new HistoryFragment();
             default:
                 return new HomeFragment();
         }
@@ -29,6 +32,6 @@ public class MyViewerPageAdapter extends FragmentStateAdapter {
 
     @Override
     public int getItemCount() {
-        return 2;
+        return 3;
     }
 }
