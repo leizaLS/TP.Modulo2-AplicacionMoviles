@@ -26,7 +26,6 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
-    //Aca va el recyclerView?
     RecyclerView recyclerView;
     ArrayList<MainPosts> recyclerList;
     FirebaseDatabase firebaseDatabase;
@@ -56,6 +55,37 @@ public class HomeFragment extends Fragment {
         firebaseDatabase.getReference().child("Post").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    MainPosts mainPosts = dataSnapshot.getValue(MainPosts.class);
+                    recyclerList.add(mainPosts);
+                }
+                recyclerAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) { }
+        });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        //Pedimos de vuelta los datos
+        recyclerView = getActivity().findViewById(R.id.recyclerView);
+        recyclerList = new ArrayList<>();
+        PostAdapter recyclerAdapter = new PostAdapter(recyclerList, getActivity());
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
+        recyclerView.setNestedScrollingEnabled(false);
+        recyclerView.setAdapter(recyclerAdapter);
+
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        firebaseDatabase.getReference().child("Post").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                recyclerList.clear();
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     MainPosts mainPosts = dataSnapshot.getValue(MainPosts.class);
                     recyclerList.add(mainPosts);

@@ -50,7 +50,13 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                 intent.putExtra("details_title", model.getPTitle());
                 intent.putExtra("details_desc", model.getpDescr());
                 intent.putExtra("details_date", model.getPublicationDate());
-                intent.putExtra("details_location", model.getCity() + ", "+ model.getState());
+                intent.putExtra("details_location", "▶ " + model.getCity() + ", "+ model.getState());
+
+                //Datos mapa
+                intent.putExtra("latitude", model.getLatitude());
+                intent.putExtra("longitude", model.getLongitude());
+
+                intent.putExtra("phoneNumber", model.getPhoneNumber());
 
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);

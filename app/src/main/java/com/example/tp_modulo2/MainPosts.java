@@ -2,7 +2,8 @@ package com.example.tp_modulo2;
 
 public class MainPosts {
     //Los datos aqui deben ser iguales a los de la firebase para que funcione
-    private String pTitle, city, pImage, publicationDate, pDescr, state;
+    private String pTitle, city, pImage, publicationDate, pDescr, state, longitude, latitude;
+    private String phoneNumber;
 
     public MainPosts() { }
 
@@ -59,5 +60,29 @@ public class MainPosts {
 
     public void setState(String state) {
         this.state = state;
+    }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 }

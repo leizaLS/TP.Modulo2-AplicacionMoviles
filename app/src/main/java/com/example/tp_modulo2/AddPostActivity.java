@@ -80,7 +80,7 @@ public class AddPostActivity extends AppCompatActivity {
     Button uploadBtn, getGps;
 
     //Datos usuario
-    String name, email, uid, dp;
+    String name, email, uid, dp, phoneNumber;
     Uri image_rui = null;
     //Datos geolocalizacion
     String city, state, country, latitude, longitude;
@@ -188,6 +188,7 @@ public class AddPostActivity extends AppCompatActivity {
                     name = "" + ds.child("name").getValue();
                     email = "" + ds.child("email").getValue();
                     dp = "" + ds.child("image").getValue();
+                    phoneNumber = "" + ds.child("phoneNumber").getValue();
                 }
             }
 
@@ -327,6 +328,7 @@ public class AddPostActivity extends AppCompatActivity {
                                 hashMap.put("longitude", longitude);
                                 hashMap.put("publicationDate", currentDate);
                                 hashMap.put("post_state", "lost");
+                                hashMap.put("phoneNumber", phoneNumber);
 
                                 DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Post");
                                 ref.child(timeStamp).setValue(hashMap)
@@ -375,6 +377,7 @@ public class AddPostActivity extends AppCompatActivity {
             hashMap.put("longitude", longitude);
             hashMap.put("publicationDate", currentDate);
             hashMap.put("post_state", "lost");
+            hashMap.put("phoneNumber", phoneNumber);
 
             DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Post");
             ref.child(timeStamp).setValue(hashMap)

@@ -56,11 +56,11 @@ public class Login extends AppCompatActivity {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //check
+
                 if (email.getText().toString().isEmpty() || password.getText().toString().isEmpty()) {
-                    Toast.makeText(Login.this, "Complete los campos primero", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Login.this, "Tiene campos sin completar", Toast.LENGTH_SHORT).show();
+                    return;
                 }
-                //
                 firebaseAuth.signInWithEmailAndPassword(email.getText().toString(), password.getText().toString()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
                     public void onSuccess(AuthResult authresult) {

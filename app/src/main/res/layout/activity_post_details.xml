@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:map="http://schemas.android.com/apk/res-auto"
     tools:context=".PostDetails">
 
     <LinearLayout
@@ -60,34 +61,31 @@
                 android:textSize="14dp"
                 android:textStyle="italic" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_margin="10dp" >
-
-                <Button
-                    android:id="@+id/details_map"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:text="▶ Mapa">
-                </Button>
-
                 <Button
                     android:id="@+id/details_msg"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
-                    android:text="Mensaje"
+                    android:text="Enviar Mensaje"
                     android:textColor="@color/black"
                     android:backgroundTint="#FF03DAC5">
                 </Button>
 
-            </LinearLayout>
+            <fragment
+                android:id="@+id/post_map"
+                android:name="com.google.android.gms.maps.SupportMapFragment"
+                android:layout_width="match_parent"
+                android:layout_height="350dp"
+                map:cameraZoom="12"
+                map:uiRotateGestures="true"
+                map:uiZoomControls="true"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="30dp" />
 
         </LinearLayout>
 
     </LinearLayout>
 
-</RelativeLayout>
+</ScrollView>
