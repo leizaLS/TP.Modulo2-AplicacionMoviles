@@ -1,5 +1,58 @@
 <resources>
     <string name="app_name">PerdidosYa</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+    <string name="camera_text">Camara</string>
+    <string name="gallery_text">Galleria</string>
+    <string name="select_image">Elige una imagen</string>
+    <string name="new_post">Nuevo post</string>
+    <string name="emptyCamp">Tiene campos sin completar</string>
+    <string name="activeGPS">Activa el GPS</string>
+    <string name="activeGPSMSG">Necesitamos tu GPS para mostrarte objetos cercanos</string>
+    <string name="uploading">Publicando...</string>
+    <string name="nopermissions">Error de permisos</string>
+    <string name="succesLogin">Logueo exitoso</string>
+    <string name="NEPass">Las contraseñas no coinciden</string>
+    <string name="registering">Registrando nuevo usuario...</string>
+
+    <!--    NEW POST-->
+    <string name="postTitle_np">Titulo de la publicacion</string>
+    <string name="description_np">Descripción</string>
+    <string name="gpsTNP">Ubicación actual...</string>
+    <string name="gpsBNP">GPS</string>
+    <string name="uploadBNP">Publicar</string>
+    <!--    LOGIN-->
+    <string name="emailLogin">Correo</string>
+    <string name="passwordLogin">Contraseña</string>
+    <string name="loginBtn">Ingresar</string>
+    <string name="registerBtn">Registrarse</string>
+    <string name="loginTitle">Iniciar sesion</string>
+    <!--    Activity Main xml-->
+    <!--    Activity Perfil-->
+    <string name="perfilLangBtn">Cambiar idioma</string>
+    <!--    Activity postDetails-->
+    <string name="detailsTitle">Titulo</string>
+    <string name="detailsDescripcion">Descripcion</string>
+    <string name="detailsLocation">Lugar</string>
+    <string name="detailsPostDate">Fecha de publicacion</string>
+    <string name="detailsSendMSG">Enviar Mensaje</string>
+    <!--    Activity Register-->
+    <string name="registerName">Nombre de usuario</string>
+    <string name="registerEmail">Correo electronico</string>
+    <string name="registerPassword">Contraseña</string>
+    <string name="registerConfirmPassword">Confirmar contraseña</string>
+    <string name="registerPhoneNumber"> Numero de telefono (+54 9 11 2233-4455)</string>
+    <string name="registerTitle">Registrarse</string>
+    <string name="registerABTN">Registrarse</string>
+    <!--    Fragment History-->
+    <!--    Fragment Home-->
+    <!--    Fragment Perfil-->
+    <string name="perfilFSpanish" translatable="false">Español</string>
+    <string name="perfilFEnglish" translatable="false">English</string>
+    <string name="perfilFFrench" translatable="false">Français</string>
+    <string name="perfilMsgLangChang">Reinicie la app para ver los cambios de idioma</string>
+    <string name="perfilReiniciar">Reiniciar</string>
+    <!--    Fragment User post-->
+
+
 </resources>

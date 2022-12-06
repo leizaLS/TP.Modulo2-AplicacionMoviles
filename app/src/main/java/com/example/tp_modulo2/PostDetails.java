@@ -4,10 +4,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
@@ -91,6 +96,7 @@ public class PostDetails extends AppCompatActivity implements OnMapReadyCallback
     ImageView favoritoImg;
     Set<String> favoritos;
     SharedPreferences preferences;
+    PendingIntent pendingIntent;
 
 
     @Override
@@ -289,22 +295,14 @@ public class PostDetails extends AppCompatActivity implements OnMapReadyCallback
     }
 
     private void comprobarFavorito(){
-/*
-        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-        String userId = firebaseAuth.getCurrentUser().getUid();
-        SharedPreferences preferences = getSharedPreferences("favoritos", Context.MODE_PRIVATE);
-        Set<String> favoritos = preferences.getStringSet(userId, null);
 
-        if (favoritos != null){
-        for (String str : favoritos) {
-                if (str.equals(pId)){
+            if (favoritos != null){
+                if (favoritos.contains(pId)){
                     favoritoImg.setImageResource(R.drawable.fav_color);
-                } else {
+                }else {
                     favoritoImg.setImageResource(R.drawable.fav_sin_color);
                 }
-        }
-        }
-*/
+            }
 
     }
 
@@ -329,19 +327,16 @@ public class PostDetails extends AppCompatActivity implements OnMapReadyCallback
         favoritos = preferences.getStringSet(userId, new HashSet<>());
 
 
+        //FUNCIONA!
         if (favoritos.contains(pId)){
-            Toast.makeText(getApplicationContext(),"BORRANDO",Toast.LENGTH_SHORT).show();
+            favoritoImg.setImageResource(R.drawable.fav_sin_color);
             Set<String> favoritos2= favoritos;
             favoritos2.remove(pId);
             editor.remove(userId).commit();
-           /* editor.putStringSet(userId, favoritos2);
-            editor.commit();*/
-            favoritoImg.setImageResource(R.drawable.fav_sin_color);
-        }
+            editor.putStringSet(userId, favoritos2);
+            editor.commit();
 
-        if (!favoritos.contains(pId)){
-            //favoritos.add(pId);
-            Toast.makeText(getApplicationContext(),"AGREGANDO",Toast.LENGTH_SHORT).show();
+        } else {
             Set<String> favoritos2= favoritos;
             favoritos2.add(pId);
             editor.remove(userId).commit();
@@ -349,9 +344,6 @@ public class PostDetails extends AppCompatActivity implements OnMapReadyCallback
             editor.commit();
             favoritoImg.setImageResource(R.drawable.fav_color);
         }
-
-
-
 
     }
 

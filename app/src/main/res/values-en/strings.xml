@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">PerdidosYa</string>
+    <string name="camera_text">Camera</string>
+    <string name="gallery_text">Gallery</string>
+    <string name="select_image">Select image</string>
+    <string name="new_post">New post</string>
+    <string name="emptyCamp">Empty fields</string>
+    <string name="activeGPS">Turn on GPS</string>
+    <string name="activeGPSMSG">" We need your GPS to show you nearby objects"</string>
+    <string name="uploading">Posting...</string>
+    <string name="nopermissions">Permissions error</string>
+    <string name="succesLogin">Successful login</string>
+    <string name="NEPass">Passwords do not match</string>
+    <string name="registering">Registering new user</string>
+    <string name="postTitle_np">Title of the publication</string>
+    <string name="description_np">Description</string>
+    <string name="gpsTNP">Current location...</string>
+    <string name="gpsBNP">GPS</string>
+    <string name="uploadBNP">Post</string>
+    <string name="emailLogin">Email</string>
+    <string name="passwordLogin">Password</string>
+    <string name="loginBtn">Sing in</string>
+    <string name="registerBtn">Sign up</string>
+    <string name="loginTitle">Sing in</string>
+    <string name="detailsTitle">Title</string>
+    <string name="detailsDescripcion">Description</string>
+    <string name="detailsLocation">Place</string>
+    <string name="detailsPostDate">Publication date</string>
+    <string name="detailsSendMSG">Send Message</string>
+    <string name="registerName">Username</string>
+    <string name="registerEmail">Email</string>
+    <string name="registerPassword">Password</string>
+    <string name="registerConfirmPassword">Confirm password</string>
+    <string name="registerPhoneNumber">Phone number (+54 9 11 2233-4455)</string>
+    <string name="registerTitle">Sign up</string>
+    <string name="registerABTN">Sign up</string>
+    <string name="perfilLangBtn">Change language</string>
+    <string name="perfilMsgLangChang">Restart the app for language changes</string>
+    <string name="perfilReiniciar">Restart</string>
+</resources>

@@ -9,7 +9,10 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -22,7 +25,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
@@ -42,6 +49,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //Cambiar idioma
+        cambiarIdioma();
+
         firebaseAuth = firebaseAuth.getInstance();
 
         //Tabs
@@ -71,59 +81,48 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //ShowData
-//        recyclerView = findViewById(R.id.recyclerView);
-//        recyclerList = new ArrayList<>();
-//        PostAdapter recyclerAdapter = new PostAdapter(recyclerList, getApplicationContext());
-//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-//        recyclerView.setLayoutManager(linearLayoutManager);
-//        recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
-//        recyclerView.setNestedScrollingEnabled(false);
-//        recyclerView.setAdapter(recyclerAdapter);
-//
-//        firebaseDatabase = FirebaseDatabase.getInstance();
-//        firebaseDatabase.getReference().child("Post").addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-//                    MainPosts mainPosts = dataSnapshot.getValue(MainPosts.class);
-//                    recyclerList.add(mainPosts);
-//                }
-//                recyclerAdapter.notifyDataSetChanged();
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) { }
-//        });
+    }
+
+    public void cambiarIdioma(){
+
+        String[] archivos = fileList();
+        if(Archivoexiste(archivos,"lang.txt")){
+            try {
+                InputStreamReader archivo = new InputStreamReader(openFileInput("lang.txt"));
+                BufferedReader bufferedReader = new BufferedReader(archivo);
+                String linea = bufferedReader.readLine();
+                String lenguaje = linea;
+                bufferedReader.close();
+                archivo.close();
+                Resources recursos = getResources();
+                DisplayMetrics metrics = recursos.getDisplayMetrics();
+                Configuration configuracion = recursos.getConfiguration();
+                Locale local;
+                configuracion.setLocale(new Locale(lenguaje));
+                local = new Locale(lenguaje);
+                Locale.setDefault(local);
+                configuracion.setLocale(local);
+                recursos.updateConfiguration(configuracion,metrics);
+                configuracion.setLayoutDirection(local);
+            }catch (IOException e){
+
+            }
+
+        }
+    }
+
+    private boolean Archivoexiste(String[] archivos, String s) {
+        for (int i = 0; i< archivos.length;i++){
+            if (s.equals(archivos[i])){
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-//        recyclerList = new ArrayList<>();
-//        PostAdapter recyclerAdapter = new PostAdapter(recyclerList, getApplicationContext());
-//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-//        recyclerView.setLayoutManager(linearLayoutManager);
-//        recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
-//        recyclerView.setNestedScrollingEnabled(false);
-//        recyclerView.setAdapter(recyclerAdapter);
-//
-//        firebaseDatabase = FirebaseDatabase.getInstance();
-//        firebaseDatabase.getReference().child("Post").addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                recyclerList.clear();
-//
-//                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-//                    MainPosts mainPosts = dataSnapshot.getValue(MainPosts.class);
-//                    recyclerList.add(mainPosts);
-//                }
-//                recyclerAdapter.notifyDataSetChanged();
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) { }
-//        });
     }
 
     //Mostrar menu de log out en main

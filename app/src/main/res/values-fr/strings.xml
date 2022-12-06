@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">PerdidosYa</string>
+    <string name="camera_text">Caméra</string>
+    <string name="gallery_text">Galerie</string>
+    <string name="select_image">Choisissez une image</string>
+    <string name="new_post">Nouveau poste</string>
+    <string name="emptyCamp">A des champs non remplis</string>
+    <string name="activeGPS">Activer le GPS</string>
+    <string name="activeGPSMSG">Nous avons besoin de votre GPS pour vous montrer les objets à proximité</string>
+    <string name="uploading">Affectation...</string>
+    <string name="nopermissions">Erreur d\'autorisation</string>
+    <string name="succesLogin">Connexion réussie</string>
+    <string name="NEPass">Les mots de passe ne correspondent pas</string>
+    <string name="registering">Enregistrement d\'un nouvel utilisateur...</string>
+    <string name="postTitle_np">Titre de la parution</string>
+    <string name="description_np">La description</string>
+    <string name="gpsTNP">Situation actuelle...</string>
+    <string name="gpsBNP">GPS</string>
+    <string name="uploadBNP">Publier</string>
+    <string name="emailLogin">Courrier</string>
+    <string name="passwordLogin">Mot de passe</string>
+    <string name="loginBtn">Entrer dans</string>
+    <string name="registerBtn">Enregistrement</string>
+    <string name="loginTitle">Commencer la session</string>
+    <string name="detailsTitle">Qualification</string>
+    <string name="detailsDescripcion">La description</string>
+    <string name="detailsLocation">Place</string>
+    <string name="detailsPostDate">Date de publication</string>
+    <string name="detailsSendMSG">Envoyer un message</string>
+    <string name="registerName">Nom d\'utilisateur</string>
+    <string name="registerEmail">Courrier électronique</string>
+    <string name="registerPassword">Mot de passe</string>
+    <string name="registerConfirmPassword">Confirmer mot de passe</string>
+    <string name="registerPhoneNumber">Numéro de téléphone (+54 9 11 2233-4455)</string>
+    <string name="registerTitle">Enregistrement</string>
+    <string name="registerABTN">Enregistrement</string>
+    <string name="perfilLangBtn">Changer la langue</string>
+    <string name="perfilMsgLangChang">Redémarrez l\'application pour les changements de langue</string>
+    <string name="perfilReiniciar">Redémarrer</string>
+</resources>

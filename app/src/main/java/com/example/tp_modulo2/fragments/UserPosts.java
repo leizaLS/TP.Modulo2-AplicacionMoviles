@@ -32,8 +32,6 @@ public class UserPosts extends Fragment {
     ArrayList<MainPosts> recyclerList;
     FirebaseDatabase firebaseDatabase;
     FirebaseAuth firebaseAuth;
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -57,45 +55,9 @@ public class UserPosts extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-
         clear();
         generarPostUsuario(view);
-
-       /* firebaseAuth = firebaseAuth.getInstance();
-        recyclerView = view.findViewById(R.id.recyclerView);
-        recyclerList = new ArrayList<>();
-        PostAdapter recyclerAdapter = new PostAdapter(recyclerList, getActivity());
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-        recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
-        recyclerView.setNestedScrollingEnabled(false);
-        recyclerView.setAdapter(recyclerAdapter);
-
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        String userEmail = firebaseAuth.getCurrentUser().getEmail();
-        DatabaseReference db =firebaseDatabase.getReference("Post");
-
-        Query query = db.orderByChild("uEmail").equalTo(userEmail);
-        query.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    MainPosts mainPosts = dataSnapshot.getValue(MainPosts.class);
-                    recyclerList.add(mainPosts);
-                }
-                recyclerAdapter.notifyDataSetChanged();
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });*/
     }
-
-
-
-
 
     private void generarPostUsuario(View view){
         firebaseAuth = firebaseAuth.getInstance();
