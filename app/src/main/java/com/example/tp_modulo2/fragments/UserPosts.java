@@ -25,6 +25,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class UserPosts extends Fragment {
 
@@ -43,12 +44,12 @@ public class UserPosts extends Fragment {
     public void clear() {
 
         if (recyclerList !=null &&recyclerList.size() > 0){
-        int size = recyclerList.size();
-        if (size > 0) {
-            for (int i = 0; i < size; i++) {
-                recyclerList.remove(0);
+            int size = recyclerList.size();
+            if (size > 0) {
+                for (int i = 0; i < size; i++) {
+                    recyclerList.remove(0);
+                }
             }
-        }
         }
     }
 
@@ -58,7 +59,6 @@ public class UserPosts extends Fragment {
         clear();
         generarPostUsuario(view);
     }
-
     private void generarPostUsuario(View view){
         firebaseAuth = firebaseAuth.getInstance();
 
@@ -83,6 +83,7 @@ public class UserPosts extends Fragment {
                     MainPosts mainPosts = dataSnapshot.getValue(MainPosts.class);
                     recyclerList.add(mainPosts);
                 }
+                Collections.reverse(recyclerList);
                 recyclerAdapter.notifyDataSetChanged();
             }
             @Override

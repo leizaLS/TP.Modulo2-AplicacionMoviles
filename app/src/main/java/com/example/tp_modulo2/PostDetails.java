@@ -98,7 +98,6 @@ public class PostDetails extends AppCompatActivity implements OnMapReadyCallback
     SharedPreferences preferences;
     PendingIntent pendingIntent;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -159,7 +158,6 @@ public class PostDetails extends AppCompatActivity implements OnMapReadyCallback
             details_desc.setEnabled(false);
         }
 
-
         //datos Mapa
         latitude = getIntent().getStringExtra("latitude");
         longitude = getIntent().getStringExtra("longitude");
@@ -179,6 +177,8 @@ public class PostDetails extends AppCompatActivity implements OnMapReadyCallback
                 startActivity(i);
             }
         });
+
+        //Listener Btn Descargar Img
         btnDescarga.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -205,19 +205,18 @@ public class PostDetails extends AppCompatActivity implements OnMapReadyCallback
         btnEditarPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), pId,Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), pId,Toast.LENGTH_SHORT).show();
                 firebaseDatabase = FirebaseDatabase.getInstance();
                 DatabaseReference db =firebaseDatabase.getReference("Post");
                 db.child(pId).child("pTitle").setValue(details_title.getText().toString());
                 db.child(pId).child("pDescr").setValue(details_desc.getText().toString());
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
             }
-
         });
     }
 
     private void eliminarPost(){
-        Toast.makeText(getApplicationContext(), pId,Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(), pId,Toast.LENGTH_SHORT).show();
         new AlertDialog.Builder(this)
                 .setTitle("Eliminacion post")
                 .setMessage("¿Desea eliminar el post?")
