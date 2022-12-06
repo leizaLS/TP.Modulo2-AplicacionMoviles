@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.firebase.auth.FirebaseAuth;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -17,6 +19,7 @@ import java.util.ArrayList;
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     ArrayList<MainPosts> list;
     Context context;
+    FirebaseAuth firebaseAuth;
 
     public PostAdapter(ArrayList<MainPosts> list, Context context) {
         this.list = list;
@@ -51,6 +54,14 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                 intent.putExtra("details_desc", model.getpDescr());
                 intent.putExtra("details_date", model.getPublicationDate());
                 intent.putExtra("details_location", "▶ " + model.getCity() + ", "+ model.getState());
+
+                //PRUEBA ENVIAR MAILS PARA COMPROBAR SI UN POST ES PROPIO
+                firebaseAuth = firebaseAuth.getInstance();
+                intent.putExtra("postEmail", model.getuEmail());
+                intent.putExtra("userEmail", firebaseAuth.getCurrentUser().getEmail());
+                intent.putExtra("pId",model.getpId());
+
+
 
                 //Datos mapa
                 intent.putExtra("latitude", model.getLatitude());

@@ -35,6 +35,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.rpc.context.AttributeContext;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Register extends AppCompatActivity {
@@ -89,6 +90,8 @@ public class Register extends AppCompatActivity {
                             String email = user.getEmail();
                             String uid = user.getUid();
 
+
+                            //CAMBIE STRING POR OBJECT
                             HashMap<Object, String> hashMap = new HashMap<>();
                             hashMap.put("email", email);
                             hashMap.put("uid", uid);
