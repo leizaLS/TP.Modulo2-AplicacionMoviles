@@ -67,8 +67,8 @@ public class Register extends AppCompatActivity {
                 //Leo los datos ingresados
                 String nameT = name.getText().toString();
                 String emailT = email.getText().toString();
-                String passwordT = password.getText().toString();
-                String passwordConfT = confirmPassword.getText().toString();
+                String passwordT = password.getText().toString().trim();
+                String passwordConfT = confirmPassword.getText().toString().trim();
                 String phoneNumberT = phoneNumber.getText().toString();
 
                 if (nameT.isEmpty() | emailT.isEmpty() | passwordT.isEmpty() | passwordConfT.isEmpty() | phoneNumberT.isEmpty()) {

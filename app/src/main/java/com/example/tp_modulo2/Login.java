@@ -61,7 +61,7 @@ public class Login extends AppCompatActivity {
                     Toast.makeText(Login.this, "Tiene campos sin completar", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                firebaseAuth.signInWithEmailAndPassword(email.getText().toString(), password.getText().toString()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                firebaseAuth.signInWithEmailAndPassword(email.getText().toString().trim(), password.getText().toString().trim()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
                     public void onSuccess(AuthResult authresult) {
                         //logueo exitoso
