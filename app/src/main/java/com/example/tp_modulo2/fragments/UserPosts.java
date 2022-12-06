@@ -25,6 +25,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class UserPosts extends Fragment {
 
@@ -45,12 +46,12 @@ public class UserPosts extends Fragment {
     public void clear() {
 
         if (recyclerList !=null &&recyclerList.size() > 0){
-        int size = recyclerList.size();
-        if (size > 0) {
-            for (int i = 0; i < size; i++) {
-                recyclerList.remove(0);
+            int size = recyclerList.size();
+            if (size > 0) {
+                for (int i = 0; i < size; i++) {
+                    recyclerList.remove(0);
+                }
             }
-        }
         }
     }
 
@@ -58,46 +59,11 @@ public class UserPosts extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
         clear();
         generarPostUsuario(view);
-
-       /* firebaseAuth = firebaseAuth.getInstance();
-        recyclerView = view.findViewById(R.id.recyclerView);
-        recyclerList = new ArrayList<>();
-        PostAdapter recyclerAdapter = new PostAdapter(recyclerList, getActivity());
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-        recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
-        recyclerView.setNestedScrollingEnabled(false);
-        recyclerView.setAdapter(recyclerAdapter);
-
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        String userEmail = firebaseAuth.getCurrentUser().getEmail();
-        DatabaseReference db =firebaseDatabase.getReference("Post");
-
-        Query query = db.orderByChild("uEmail").equalTo(userEmail);
-        query.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    MainPosts mainPosts = dataSnapshot.getValue(MainPosts.class);
-                    recyclerList.add(mainPosts);
-                }
-                recyclerAdapter.notifyDataSetChanged();
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });*/
     }
 
-
-
-
-
-    private void generarPostUsuario(View view){
+    private void generarPostUsuario(View view) {
         firebaseAuth = firebaseAuth.getInstance();
 
         recyclerView = view.findViewById(R.id.recyclerView);
@@ -121,6 +87,7 @@ public class UserPosts extends Fragment {
                     MainPosts mainPosts = dataSnapshot.getValue(MainPosts.class);
                     recyclerList.add(mainPosts);
                 }
+                Collections.reverse(recyclerList);
                 recyclerAdapter.notifyDataSetChanged();
             }
             @Override
